@@ -1,5 +1,5 @@
 <?php
-namespace Lazada\lazop;
+namespace Lazada\Lazop;
 
 class UrlConstants
 {

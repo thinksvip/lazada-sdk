@@ -1,6 +1,6 @@
 <?php
 
-namespace Lazada\lazop;
+namespace Lazada\Lazop;
 
 use Exception;
 

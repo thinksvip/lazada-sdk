@@ -3,8 +3,11 @@
 namespace Lazada;
 
 
-use Lazada\lazop\LazopClient;
-use Lazada\lazop\LazopRequest;
+use Lazada\Lazop\LazopClient;
+use Lazada\Lazop\LazopRequest;
+use Exception;
+use JsonMapper;
+use Lazada\Object\Response;
 
 class LazadaAPI
 {
@@ -14,45 +17,56 @@ class LazadaAPI
      */
     private $accessToken = null;
 
-    private $LazopClient =null;
+    private $LazopClient = null;
+
+    private $serializer = null;
 
     /**
      * LazadaAPI constructor.
      * @param string $accessToken
      */
-    public function __construct($accessToken,$url = "",$appkey = "",$secretKey = "")
+    public function __construct($accessToken, $url = "", $appkey = "", $secretKey = "")
     {
         $this->accessToken = $accessToken;
 
-        $this->LazopClient = new LazopClient($url,$appkey,$secretKey);
+        $this->LazopClient = new LazopClient($url, $appkey, $secretKey);
+
+        $this->serializer = new JsonMapper();
     }
 
     public function GetOrder(LazopRequest $request)
     {
 
-        $response = $this->LazopClient->execute($request,$this->accessToken);
+        $response = $this->LazopClient->execute($request, $this->accessToken);
+        $response = json_decode($response);
+        if ($response->code != "0") throw new Exception($response->message, $response->code);
 
+        $order['order'] = $response->data;
+
+        return $this->serializer->map($order, new Response());
     }
 
     public function GetOrders(LazopRequest $request)
     {
 
-        $response = $this->LazopClient->execute($request,$this->accessToken);
+        $response = $this->LazopClient->execute($request, $this->accessToken);
+        $response = json_decode($response);
+        if ($response->code != "0") throw new Exception($response->message, $response->code);
 
-        return $response;
-
-    }
-    public function GetMultipleOrderItems(LazopRequest $request)
-    {
-
-        $response = $this->LazopClient->execute($request,$this->accessToken);
+        return $this->serializer->map($response->data, new Response());
 
     }
+
+
+
     public function GetOrderItems(LazopRequest $request)
     {
+        $response = $this->LazopClient->execute($request, $this->accessToken);
+        $response = json_decode($response);
+        if ($response->code != "0") throw new Exception($response->message, $response->code);
 
-        $response = $this->LazopClient->execute($request,$this->accessToken);
-
+        $goods['goods'] = $response->data;
+        return $this->serializer->map($goods, new Response());
     }
 
 }
