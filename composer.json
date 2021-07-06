@@ -1,0 +1,22 @@
+{
+  "name": "thinksvip/lazada-sdk",
+  "description": "API Framework for https://open.lazada.com/ (Lazada SDK 非官方)",
+  "minimum-stability": "stable",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "thinksvip",
+      "email": "thinksvip@outlook.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "ext-json": "*",
+    "php": ">=7.2",
+    "netresearch/jsonmapper": "*",
+    "ext-curl": "*"
+  },
+  "autoload": {
+    "psr-4": {"Lazada\\": "src/"}
+  }
+}
