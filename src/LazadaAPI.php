@@ -34,39 +34,56 @@ class LazadaAPI
         $this->serializer = new JsonMapper();
     }
 
+    /**
+     * 获取指定订单
+     * @param LazopRequest $request
+     * @return mixed|object
+     * @throws \JsonMapper_Exception
+     */
     public function GetOrder(LazopRequest $request)
     {
 
         $response = $this->LazopClient->execute($request, $this->accessToken);
         $response = json_decode($response);
-        if ($response->code != "0") throw new Exception($response->message, $response->code);
+        if ($response->code != "0") throw new Exception($response->message);
 
         $order['order'] = $response->data;
 
-        return $this->serializer->map($order, new Response());
+        return $this->serializer->map(json_decode(json_encode($order)), new Response());
     }
 
+    /**
+     * 获取订单列表
+     * @param LazopRequest $request
+     * @return mixed|object
+     * @throws \JsonMapper_Exception
+     */
     public function GetOrders(LazopRequest $request)
     {
 
         $response = $this->LazopClient->execute($request, $this->accessToken);
         $response = json_decode($response);
-        if ($response->code != "0") throw new Exception($response->message, $response->code);
+        if ($response->code != "0") throw new Exception($response->message);
 
         return $this->serializer->map($response->data, new Response());
 
     }
 
-
-
+    /**
+     * 获取指定订单商品列表
+     * @param LazopRequest $request
+     * @return mixed|object
+     * @throws \JsonMapper_Exception
+     */
     public function GetOrderItems(LazopRequest $request)
     {
         $response = $this->LazopClient->execute($request, $this->accessToken);
         $response = json_decode($response);
-        if ($response->code != "0") throw new Exception($response->message, $response->code);
+        if ($response->code != "0") throw new Exception($response->message);
 
         $goods['goods'] = $response->data;
-        return $this->serializer->map($goods, new Response());
+
+        return $this->serializer->map(json_decode(json_encode($goods)), new Response());
     }
 
 }

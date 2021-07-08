@@ -24,4 +24,17 @@ class Response
      * @var \Lazada\Object\Goods[]|null
      */
     public $goods = null;
+
+    /**
+     * 总数量
+     * @var int|null
+     */
+    public $countTotal = 0;
+
+
+    /**
+     * 分页limit
+     * @var int|null
+     */
+    public $count = 0;
 }

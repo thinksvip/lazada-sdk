@@ -175,7 +175,7 @@ class Goods
      * 承诺的发货时间
      * @var string|null
      */
-    public $promised_shipping_time = null;
+    public $promised_shipping_times = null;
     /**
      * 运输类型，直接运输或仓库
      * @var string|null
