@@ -146,7 +146,7 @@ class LazadaAPI
     }
 
     /**
-     * 获取获取袋子面单
+     * 获取袋子面单
      * @param LazopRequest $request
      * @return mixed
      * @throws \JsonMapper_Exception
@@ -161,7 +161,7 @@ class LazadaAPI
     }
 
     /**
-     * 获取获取袋子面单
+     * 获取物流袋子（大包）
      * @param LazopRequest $request
      * @return mixed
      * @throws \JsonMapper_Exception
@@ -176,7 +176,7 @@ class LazadaAPI
     }
 
     /**
-     * 获取获取袋子面单
+     * 获取单个包裹信息
      * @param LazopRequest $request
      * @return mixed
      * @throws \JsonMapper_Exception
@@ -191,7 +191,7 @@ class LazadaAPI
     }
 
     /**
-     * 获取获取袋子面单
+     * 获取商家授权
      * @param LazopRequest $request
      * @return mixed
      * @throws \JsonMapper_Exception
