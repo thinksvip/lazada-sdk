@@ -42,7 +42,6 @@ class LazadaAPI
      */
     public function GetOrder(LazopRequest $request)
     {
-
         $response = $this->LazopClient->execute($request, $this->accessToken);
         $response = json_decode($response);
         if ($response->code != "0") throw new Exception($response->message);
@@ -124,20 +123,7 @@ class LazadaAPI
      */
     public function GetCreateLogisticsBigBag(LazopRequest $request)
     {
-        $response = '{
-    "result": {
-        "data": {
-            "handoverContentId": 8937091,
-            "handoverContentCode": "LP00459690318748",
-            "handoverOrderId": 9359091
-        },
-        "success": true
-    },
-    "code": "0",
-    "request_id": "210174ec16275285411993593"
-}';
-
-        /*$response = $this->LazopClient->execute($request, $this->accessToken);*/
+        $response = $this->LazopClient->execute($request, $this->accessToken);
         $response = json_decode($response);
         if ($response->code != "0") throw new Exception($response->message);
 
@@ -202,5 +188,20 @@ class LazadaAPI
         if ($response->code != "0") throw new Exception($response->message);
 
         return $response->result;
+    }
+
+    /**
+     * 获取获取袋子面单
+     * @param LazopRequest $request
+     * @return mixed
+     * @throws \JsonMapper_Exception
+     */
+    public function GetSellerAuth(LazopRequest $request)
+    {
+        $response = $this->LazopClient->execute($request, $this->accessToken);
+        $response = json_decode($response);
+        if ($response->code != "0") throw new Exception($response->message);
+
+        return $response;
     }
 }

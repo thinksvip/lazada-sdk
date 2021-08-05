@@ -152,7 +152,7 @@ class LazopRequest
         $request->httpMethod = 'GET';
         $request->addApiParam('client', $client);
         $request->addApiParam('userInfo', $userInfo);
-        $request->addApiParam('pickInfo', $pickInfo);
+        $request->addApiParam('pickupInfo', $pickInfo);
         $request->addApiParam('weightUnit', $weightUnit);
         $request->addApiParam('type', $type);
         $request->addApiParam('returnInfo', $returnInfo);
@@ -262,6 +262,28 @@ class LazopRequest
         $request = new LazopRequest();
         $request->apiName = '/logistics/package/query';
         $request->addApiParam('trackingNumber', $trackingNumber);
+        return $request;
+    }
+
+    /**
+     * 设置商家授权
+     * @param string $userInfo
+     * @param string $storeList
+     * @param array $params
+     * @return LazopRequest
+     * @throws Exception
+     */
+    public static function setSellerAuth(string $userInfo, string $storeList, array $params = [])
+    {
+        $request = new LazopRequest();
+        $request->apiName = '/logistics/cnpms/account/bind';
+        $request->addApiParam('userInfo', $userInfo);
+        $request->addApiParam('sellerList', $storeList);
+        if ($params) {
+            foreach ($params as $key => $value) {
+                $request->addApiParam($key, $value);
+            }
+        }
         return $request;
     }
 
