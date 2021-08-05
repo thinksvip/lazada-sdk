@@ -89,6 +89,204 @@ class LazopRequest
         return $request;
     }
 
+    /**
+     * 获取集货点
+     * @param string $client
+     * @return LazopRequest
+     * @throws Exception
+     */
+    public static function getLogisticsReceivingPoint(string $client)
+    {
+        $request = new LazopRequest();
+        $request->apiName = '/logistics/cnpms/bigbag/querycollection';
+        $request->httpMethod = 'GET';
+        $request->addApiParam('client', $client);
+        return $request;
+    }
+
+    /**
+     * 获取揽件地址 ID
+     * @param string $appUserKey 应用秘钥，用于授权分组
+     * @param string $country 国家
+     * @param string $province 省
+     * @param string $city 市
+     * @param string $district 区/县
+     * @param string $street 街道
+     * @param string $detailAddress 详细地址
+     * @return LazopRequest
+     * @throws Exception
+     */
+    public static function getlogisticsAddressId(string $appUserKey, string $country, string $province, string $city, string $district, string $street, string $detailAddress)
+    {
+        $request = new LazopRequest();
+        $request->apiName = '/logistics/cnpms/address/query';
+        $request->httpMethod = 'GET';
+        $request->addApiParam('userInfo', $appUserKey);
+        $request->addApiParam('country', $country);
+        $request->addApiParam('province', $province);
+        $request->addApiParam('city', $city);
+        $request->addApiParam('district', $district);
+        $request->addApiParam('street', $street);
+        $request->addApiParam('detailAddress', $detailAddress);
+        return $request;
+    }
+
+    /**
+     * 创建物流袋子（大包）
+     * @param string $client
+     * @param string $userInfo
+     * @param string $pickInfo
+     * @param string $weightUnit
+     * @param string $type
+     * @param string $returnInfo
+     * @param string $orderCodeList
+     * @param string $weight
+     * @param array $params
+     * @return LazopRequest
+     * @throws Exception
+     */
+    public static function createLogisticsBigBag(string $client, string $userInfo, string $pickInfo, string $weightUnit, string $type, string $returnInfo, string $orderCodeList, string $weight, array $params = [])
+    {
+        $request = new LazopRequest();
+        $request->apiName = '/logistics/cnpms/bigbag/commit';
+        $request->httpMethod = 'GET';
+        $request->addApiParam('client', $client);
+        $request->addApiParam('userInfo', $userInfo);
+        $request->addApiParam('pickupInfo', $pickInfo);
+        $request->addApiParam('weightUnit', $weightUnit);
+        $request->addApiParam('type', $type);
+        $request->addApiParam('returnInfo', $returnInfo);
+        $request->addApiParam('orderCodeList', $orderCodeList);
+        $request->addApiParam('weight', $weight);
+        if ($params) {
+            foreach ($params as $key => $value) {
+                $request->addApiParam($key, $value);
+            }
+        }
+        return $request;
+    }
+
+    /**
+     * 取消物流袋子（大包）
+     * @param string $client
+     * @param string $userInfo
+     * @param string $orderCode
+     * @param string $trackingNumber
+     * @param array $params
+     * @return LazopRequest
+     * @throws Exception
+     */
+    public static function logisticsBigBagCancel(string $client, string $userInfo, string $orderCode = '', string $trackingNumber = '', array $params = [])
+    {
+        $request = new LazopRequest();
+        $request->apiName = '/logistics/cnpms/bigbag/cancel';
+        $request->httpMethod = 'GET';
+        $request->addApiParam('client', $client);
+        $request->addApiParam('userInfo', $userInfo);
+        $request->addApiParam('orderCode', $orderCode);
+        if ($trackingNumber) {
+            $request->addApiParam('trackingNumber', $trackingNumber);
+        }
+        if ($params) {
+            foreach ($params as $key => $value) {
+                $request->addApiParam($key, $value);
+            }
+        }
+        return $request;
+    }
+
+    /**
+     * 获取袋子面单
+     * @param string $client
+     * @param string $userInfo
+     * @param string $orderCode
+     * @param string $trackingNumber
+     * @param array $params
+     * @return LazopRequest
+     * @throws Exception
+     */
+    public static function getLogisticsBigBagFaceSheet(string $client, string $userInfo, string $orderCode = '', string $trackingNumber = '', array $params = [])
+    {
+        $request = new LazopRequest();
+        $request->apiName = '/logistics/cnpms/bigbag/lable/getPdf';
+        $request->addApiParam('client', $client);
+        $request->addApiParam('userInfo', $userInfo);
+        $request->addApiParam('orderCode', $orderCode);
+        if ($trackingNumber) {
+            $request->addApiParam('trackingNumber', $trackingNumber);
+        }
+        if ($params) {
+            foreach ($params as $key => $value) {
+                $request->addApiParam($key, $value);
+            }
+        }
+        return $request;
+    }
+
+    /**
+     * 获取袋子
+     * @param string $client
+     * @param string $userInfo
+     * @param string $orderCode
+     * @param string $trackingNumber
+     * @param array $params
+     * @return LazopRequest
+     * @throws Exception
+     */
+    public static function getLogisticsBigBag(string $client, string $userInfo, string $orderCode = '', string $trackingNumber = '', array $params = [])
+    {
+        $request = new LazopRequest();
+        $request->apiName = '/logistics/cnpms/bigbag/query';
+        $request->addApiParam('client', $client);
+        $request->addApiParam('userInfo', $userInfo);
+        $request->addApiParam('orderCode', $orderCode);
+        if ($trackingNumber) {
+            $request->addApiParam('trackingNumber', $trackingNumber);
+        }
+        if ($params) {
+            foreach ($params as $key => $value) {
+                $request->addApiParam($key, $value);
+            }
+        }
+        return $request;
+    }
+
+    /**
+     * 获取包裹
+     * @param string $trackingNumber
+     * @return LazopRequest
+     * @throws Exception
+     */
+    public static function getPackage(string $trackingNumber = '')
+    {
+        $request = new LazopRequest();
+        $request->apiName = '/logistics/package/query';
+        $request->addApiParam('trackingNumber', $trackingNumber);
+        return $request;
+    }
+
+    /**
+     * 设置商家授权
+     * @param string $userInfo
+     * @param string $storeList
+     * @param array $params
+     * @return LazopRequest
+     * @throws Exception
+     */
+    public static function setSellerAuth(string $userInfo, string $storeList, array $params = [])
+    {
+        $request = new LazopRequest();
+        $request->apiName = '/logistics/cnpms/account/bind';
+        $request->addApiParam('userInfo', $userInfo);
+        $request->addApiParam('sellerList', $storeList);
+        if ($params) {
+            foreach ($params as $key => $value) {
+                $request->addApiParam($key, $value);
+            }
+        }
+        return $request;
+    }
+
     private function addApiParam($key, $value)
     {
 

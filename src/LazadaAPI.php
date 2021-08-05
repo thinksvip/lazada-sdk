@@ -42,7 +42,6 @@ class LazadaAPI
      */
     public function GetOrder(LazopRequest $request)
     {
-
         $response = $this->LazopClient->execute($request, $this->accessToken);
         $response = json_decode($response);
         if ($response->code != "0") throw new Exception($response->message);
@@ -86,4 +85,123 @@ class LazadaAPI
         return $this->serializer->map(json_decode(json_encode($goods)), new Response());
     }
 
+    /**
+     * 获取集货点列表
+     * @param LazopRequest $request
+     * @return mixed|object
+     * @throws \JsonMapper_Exception
+     */
+    public function GetLogisticsReceivingPoint(LazopRequest $request)
+    {
+        $response = $this->LazopClient->execute($request, $this->accessToken);
+        $response = json_decode($response);
+        if ($response->code != "0") throw new Exception($response->message);
+
+        return $response->result;
+    }
+
+    /**
+     * 获取揽收地址信息
+     * @param LazopRequest $request
+     * @return mixed
+     * @throws \JsonMapper_Exception
+     */
+    public function GetLogisticsAddressId(LazopRequest $request)
+    {
+        $response = $this->LazopClient->execute($request, $this->accessToken);
+        $response = json_decode($response);
+        if ($response->code != "0") throw new Exception($response->message);
+
+        return $response->result;
+    }
+
+    /**
+     * 获取创建物流袋子（大包）
+     * @param LazopRequest $request
+     * @return mixed
+     * @throws \JsonMapper_Exception
+     */
+    public function GetCreateLogisticsBigBag(LazopRequest $request)
+    {
+        $response = $this->LazopClient->execute($request, $this->accessToken);
+        $response = json_decode($response);
+        if ($response->code != "0") throw new Exception($response->message);
+
+        return $response->result;
+    }
+
+    /**
+     * 获取取消物流袋子（大包）
+     * @param LazopRequest $request
+     * @return mixed
+     * @throws \JsonMapper_Exception
+     */
+    public function GetLogisticsBigBagCancel(LazopRequest $request)
+    {
+        $response = $this->LazopClient->execute($request, $this->accessToken);
+        $response = json_decode($response);
+        if ($response->code != "0") throw new Exception($response->message);
+
+        return $response->result;
+    }
+
+    /**
+     * 获取袋子面单
+     * @param LazopRequest $request
+     * @return mixed
+     * @throws \JsonMapper_Exception
+     */
+    public function GetLogisticsBigBagFaceSheet(LazopRequest $request)
+    {
+        $response = $this->LazopClient->execute($request, $this->accessToken);
+        $response = json_decode($response);
+        if ($response->code != "0") throw new Exception($response->message);
+
+        return $response->result;
+    }
+
+    /**
+     * 获取物流袋子（大包）
+     * @param LazopRequest $request
+     * @return mixed
+     * @throws \JsonMapper_Exception
+     */
+    public function GetLogisticsBigBag(LazopRequest $request)
+    {
+        $response = $this->LazopClient->execute($request, $this->accessToken);
+        $response = json_decode($response);
+        if ($response->code != "0") throw new Exception($response->message);
+
+        return $response->result;
+    }
+
+    /**
+     * 获取单个包裹信息
+     * @param LazopRequest $request
+     * @return mixed
+     * @throws \JsonMapper_Exception
+     */
+    public function GetPackage(LazopRequest $request)
+    {
+        $response = $this->LazopClient->execute($request, $this->accessToken);
+        $response = json_decode($response);
+        if ($response->code != "0") throw new Exception($response->message);
+
+        return $response->result;
+    }
+
+    /**
+     * 获取商家授权
+     * @param LazopRequest $request
+     * @return mixed
+     * @throws \JsonMapper_Exception
+     */
+    public function GetSellerAuth(LazopRequest $request)
+    {
+        $response = $this->LazopClient->execute($request, $this->accessToken);
+        $response = json_decode($response);
+        if ($response->code != "0") throw new Exception($response->message);
+
+        return $response;
+    }
 }
