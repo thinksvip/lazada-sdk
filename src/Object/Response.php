@@ -26,6 +26,12 @@ class Response
     public $goods = null;
 
     /**
+     * lazada 交易明细
+     * @var \Lazada\Object\Transaction[]|null
+     */
+    public $transaction = null;
+
+    /**
      * 总数量
      * @var int|null
      */

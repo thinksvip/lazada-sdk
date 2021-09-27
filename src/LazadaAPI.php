@@ -204,4 +204,21 @@ class LazadaAPI
 
         return $response;
     }
+
+    /**
+     * 查询特定日期范围内交易明细
+     * @param LazopRequest $request
+     * @return mixed|object
+     * @throws \JsonMapper_Exception
+     */
+    public function queryTransactionDetails(LazopRequest $request)
+    {
+        $response = $this->LazopClient->execute($request, $this->accessToken);
+        $response = json_decode($response);
+        if ($response->code != "0") throw new Exception($response->message);
+
+        $transaction['transaction'] = $response->data;
+
+        return $this->serializer->map(json_decode(json_encode($transaction)), new Response());
+    }
 }
