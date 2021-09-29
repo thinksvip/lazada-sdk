@@ -287,6 +287,40 @@ class LazopRequest
         return $request;
     }
 
+    /**
+     * 获取一段时间内的交易详情数据
+     * @param String $start_time 开始时间
+     * @param String $end_time 结束时间
+     * @param int $offset
+     * @param int $limit
+     * @param String $trans_type 交易类型ID
+     * @param String $trade_order_id 订单 ID.
+     * @param String $trade_order_line_id Order Item ID.
+     * @return LazopRequest
+     * @throws Exception
+     */
+    public static function queryTransactionDetails(String $start_time,String $end_time,int $offset = 0,int $limit = 100,String $trans_type = '',String $trade_order_id = '',String $trade_order_line_id = '')
+    {
+        $request = new LazopRequest();
+        $request->apiName = '/finance/transaction/details/get';
+        $request->httpMethod = 'GET';
+        $request->addApiParam('start_time',$start_time);
+        $request->addApiParam('end_time',$end_time);
+        $request->addApiParam('offset',$offset);
+        $request->addApiParam('limit',$limit);
+        if(!empty($trans_type)){
+            $request->addApiParam('trans_type',$trans_type);
+        }
+        if(!empty($trade_order_id)){
+            $request->addApiParam('trade_order_id',$trade_order_id);
+        }
+        if(!empty($trade_order_line_id)){
+            $request->addApiParam('trade_order_line_id',$trade_order_line_id);
+        }
+
+        return $request;
+    }
+
     private function addApiParam($key, $value)
     {
 
