@@ -18,21 +18,21 @@ class LazopRequest
 
     /**
      * 获取订单列表
-     * @param string $created_after 创建开始时间
-     * @param string $created_before 创建结束时间
+     * @param string $update_after 更新开始时间
+     * @param string $update_before 更新结束时间
      * @param string $sort_by
      * @param string $status
      * @param array|null $params
      * @return mixed
      * @throws Exception
      */
-    public static function getOrders(string $created_after, string $created_before, string $sort_by, string $status, array $params = null)
+    public static function getOrders(string $update_after, string $update_before, string $sort_by, string $status, array $params = null)
     {
         $request = new LazopRequest();
         $request->apiName = '/orders/get';
         $request->httpMethod = 'GET';
-        $request->addApiParam('created_after', $created_after);
-        $request->addApiParam('created_before', $created_before);
+        $request->addApiParam('update_after', $update_after);
+        $request->addApiParam('update_before', $update_before);
         $request->addApiParam('sort_by', $sort_by);
         $request->addApiParam('status', $status);
 
