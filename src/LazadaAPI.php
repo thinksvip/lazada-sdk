@@ -17,7 +17,7 @@ class LazadaAPI
      */
     private $accessToken = null;
 
-    private $LazopClient = null;
+    public $LazopClient = null;
 
     private $serializer = null;
 
